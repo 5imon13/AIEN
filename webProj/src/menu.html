@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Menu</title>
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <style>
+        /* #container{
+
+        } */
+        #crust {
+            position: fixed;
+            right: 0;
+            top: 30%;
+            width: 500px;
+            height: 500px;
+            z-index: -1;
+        }
+
+        .topping {
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 500px;
+            height: 250px;
+            z-index: 1;
+            opacity: 0.9;
+        }
+
+        button {
+            font-size: 20px;
+            display: inline;
+            padding: 5px 25px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: grey;
+            color: white;
+        }
+        span{
+            float:right;
+            /* overflow:hidden */
+        }
+        #menu {
+            width: 500px;
+            height: 500px;
+            border: 5px solid gold;
+            margin-bottom: 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 20px
+        }
+
+        .item {
+            width: 350px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid rgb(128, 0, 255);
+            margin: 5px auto;
+            float:left;
+            padding-left: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <fieldset id="menu">
+            <legend>Menu</legend>
+            <div class="item">
+                配料
+                <span>
+                    <button id="add">Add</button>
+                <button id="remove">Remove</button>
+
+                </span>
+                
+
+            </div>
+
+        </fieldset>
+
+
+        <img src="../images/crust.png" id="crust">
+        <img src="../images/top.png" class="topping" id="top">
+        <img src="../images/pep.png" class="topping" id="pep">
+        <!-- <img src="../images/onion.png" class = "top" id="onion"> -->
+        <!-- <img src="../images/redP.png" class = "top" id="redP"> -->
+
+
+
+
+    </div>
+    <script>
+        $(document).ready(function () {
+            $(".topping").hide();
+            $("#add").click(function () {
+                drop(".topping");
+            });
+            $("#remove").click(function () {
+                remove(".topping");
+            });
+
+            function drop(ele) {
+                $(ele).show();
+                $(ele).animate({
+                    top: "30%",
+                    height: "500px",
+                    right: "1%"
+                }, 500);
+                $(ele).animate({
+                    top: "28%",
+                }, 200);
+                $(ele).animate({
+                    top: "30%",
+                    right: "0%",
+                }, 200);
+            }
+            function remove(ele) {
+                $(ele).hide();
+                $(ele).css({
+                    right: 0,
+                    top: 0,
+                    height: "250px",
+                })
+            }
+        });
+    </script>
+</body>
+
+</html>
