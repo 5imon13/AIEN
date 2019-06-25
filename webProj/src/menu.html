@@ -8,9 +8,6 @@
     <title>Menu</title>
     <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
     <style>
-        /* #container{
-
-        } */
         #crust {
             position: fixed;
             right: 0;
@@ -27,13 +24,13 @@
             width: 500px;
             height: 250px;
             z-index: 1;
-            opacity: 0.9;
+            opacity: 0.95;
         }
 
         button {
             font-size: 20px;
             display: inline;
-            padding: 5px 25px;
+            padding: 5px 20px;
             background-color: #4CAF50;
             color: white;
             border: none;
@@ -43,11 +40,6 @@
         button:hover {
             background-color: grey;
             color: white;
-        }
-
-        span {
-            float: right;
-            /* overflow:hidden */
         }
 
         #menu {
@@ -61,12 +53,17 @@
         }
 
         .item {
-            width: 350px;
-            padding-bottom: 5px;
-            border-bottom: 2px solid rgb(128, 0, 255);
+            width: 450px;
+            /*border: 2px solid rgb(128, 0, 255);*/
             margin: 5px auto;
-            float: left;
-            padding-left: 50px;
+            border-collapse: collapse;
+        }
+        td{
+            border-bottom: 2px solid rgb(128, 0, 255);
+            height:50px;
+            text-align: right;
+            text-align: right;
+            vertical-align: bottom;
         }
     </style>
 </head>
@@ -75,37 +72,76 @@
 <div id="container">
     <fieldset id="menu">
         <legend>Menu</legend>
-        <div class="item">
-            配料
-            <span>
-                    <button id="add">Add</button>
-                <button id="remove">Remove</button>
+        <table class="item">
+            <thead>
+            <th colspan="4">配料</th>
+            </thead>
+            <tbody>
+            <tr class = "onion">
+                <td>Onion</td>
 
-                </span>
+                <td>
+                    <button class="add">Add</button>
+                    <button class="remove">Remove</button>
+                </td>
+            </tr>
+            <tr class = "pep">
+                <td>Pepperoni</td>
+
+                <td>
+                    <button class="add">Add</button>
+
+                    <button class="remove">Remove</button>
+                </td>
+            </tr>
+            <tr class = "greenP">
+                <td>Green Pepper</td>
+
+                <td>
+                    <button class="add">Add</button>
+                    <button class="remove">Remove</button>
+                </td>
+            </tr>
+            <tr class = "redP">
+                <td>Red Pepper</td>
+
+                <td>
+                    <button class="add">Add</button>
+                    <button class="remove">Remove</button>
+                </td>
+            </tr>
 
 
-        </div>
+
+
+
+
+
+            </tbody>
+
+
+        </table>
+
 
     </fieldset>
 
 
     <img src="../images/crust.png" id="crust">
-    <img src="../images/top.png" class="topping" id="top">
-    <img src="../images/pep.png" class="topping" id="pep">
-<!--    <img src="../images/onion.png" class="topping" id="onion">-->
-    <!-- <img src="../images/redP.png" class = "topping" id="redP"> -->
-    <img src="../images/pin.png" class="topping" id="pin">
-
+    <img src="../images/pep.png" class="topping pep" id="pep">
+    <img src="../images/greenP.png" class="topping greenP" id="greenP">
+<!--    <img src="../images/onion.png" class="topping onion" id="onion">-->
+    <img src="../images/redP.png" class = "topping redP" id="redP">
+<!--    <img src="../images/pin.png" class="topping pin" id="pin">-->
 
 
 </div>
 <script>
     $(document).ready(function () {
         $(".topping").hide();
-        $("#add").click(function () {
+        $(".add").click(function () {
             drop(".topping");
         });
-        $("#remove").click(function () {
+        $(".remove").click(function () {
             remove(".topping");
         });
 
