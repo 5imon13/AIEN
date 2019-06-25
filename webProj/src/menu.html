@@ -22,9 +22,9 @@
             right: 0;
             top: 0;
             width: 500px;
-            height: 250px;
+            height: 200px;
             z-index: 1;
-            opacity: 0.95;
+            /*opacity: 1;*/
         }
 
         button {
@@ -79,24 +79,20 @@
             <tbody>
             <tr class = "onion">
                 <td>Onion</td>
-
                 <td>
                     <button class="add">Add</button>
                     <button class="remove">Remove</button>
                 </td>
             </tr>
-            <tr class = "pep">
+            <tr class = "pepp">
                 <td>Pepperoni</td>
-
                 <td>
                     <button class="add">Add</button>
-
                     <button class="remove">Remove</button>
                 </td>
             </tr>
             <tr class = "greenP">
                 <td>Green Pepper</td>
-
                 <td>
                     <button class="add">Add</button>
                     <button class="remove">Remove</button>
@@ -104,56 +100,65 @@
             </tr>
             <tr class = "redP">
                 <td>Red Pepper</td>
-
                 <td>
                     <button class="add">Add</button>
                     <button class="remove">Remove</button>
                 </td>
             </tr>
-
-
-
-
-
-
-
+            <tr class = "pin">
+                <td>Pineapple</td>
+                <td>
+                    <button class="add">Add</button>
+                    <button class="remove">Remove</button>
+                </td>
+            </tr>
+            <tr class = "ham">
+                <td>Ham</td>
+                <td>
+                    <button class="add">Add</button>
+                    <button class="remove">Remove</button>
+                </td>
+            </tr>
             </tbody>
-
-
         </table>
-
-
     </fieldset>
-
-
-    <img src="../images/crust.png" id="crust">
-    <img src="../images/pep.png" class="topping pep" id="pep">
-    <img src="../images/greenP.png" class="topping greenP" id="greenP">
-<!--    <img src="../images/onion.png" class="topping onion" id="onion">-->
-    <img src="../images/redP.png" class = "topping redP" id="redP">
-<!--    <img src="../images/pin.png" class="topping pin" id="pin">-->
-
-
 </div>
+    <img src="../images/crust.png" id="crust">
+    <img src="../images/pepp.png" class="topping pepp">
+    <img src="../images/greenP.png" class="topping greenP">
+    <img src="../images/onion.png" class="topping onion">
+    <img src="../images/redP.png" class = "topping redP">
+    <img src="../images/pin.png" class="topping pin">
+    <img src="../images/ham.png" class="topping ham">
+
+
 <script>
     $(document).ready(function () {
         $(".topping").hide();
+        var z = 1;
         $(".add").click(function () {
-            drop(".topping");
+            let pClass = $(this).closest('tr').attr('class');
+            drop(".topping."+pClass);
+            $(this).attr("disabled", true);
+            //  .
+
         });
         $(".remove").click(function () {
-            remove(".topping");
+            let pClass = $(this).closest('tr').attr('class');
+            remove(".topping."+pClass);
         });
 
         function drop(ele) {
             $(ele).show();
+            $(ele).css('z-index', z++);
             $(ele).animate({
                 top: "30%",
                 height: "500px",
-                right: "1%"
-            }, 500);
+                right: "2%"
+            }, 1000);
             $(ele).animate({
                 top: "28%",
+                right:"1%"
             }, 200);
             $(ele).animate({
                 top: "30%",
