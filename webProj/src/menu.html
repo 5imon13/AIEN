@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Menu</title>
 <!--    <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>-->
-    <script src = "../lib/jquery-3.4.1.js"></script>
+    <script src = "../public/lib/jquery-3.4.1.js"></script>
 
     <style>
         #crust {
@@ -41,7 +41,7 @@
             background-color: darkgreen;
             color: white;
         }
-        #menu {
+        fieldset {
             width: 500px;
             height: 500px;
             border: 5px solid gold;
@@ -49,6 +49,9 @@
             border-radius: 25px;
             font-weight: bold;
             font-size: 20px
+        }
+        #order{
+            height:300px;
         }
         .item {
             width: 450px;
@@ -59,7 +62,6 @@
         td{
             border-bottom: 2px solid rgb(128, 0, 255);
             height:50px;
-            text-align: right;
             text-align: right;
             vertical-align: bottom;
         }
@@ -76,7 +78,7 @@
         <legend>Menu</legend>
         <table class="item">
             <thead>
-            <th colspan="4">配料</th>
+                <th colspan="2">配料</th>
             </thead>
             <tbody>
             <tr class = "onion">
@@ -125,18 +127,23 @@
         </table>
     </fieldset>
 </div>
-    <img src="../images/crust.png" id="crust">
-    <img src="../images/pepp.png" class="topping pepp">
-    <img src="../images/greenP.png" class="topping greenP">
-    <img src="../images/onion.png" class="topping onion">
-    <img src="../images/redP.png" class = "topping redP">
-    <img src="../images/pin.png" class="topping pin">
-    <img src="../images/ham.png" class="topping ham">
+<div>
+    <fieldset id = "order">
+        <legend>Order</legend>
+    </fieldset>
+</div>
+    <img src="../public/images/crust.png" id="crust" alt="img not found">
+    <img src="../public/images/pepp.png" class="topping pepp" alt="img not found">
+    <img src="../public/images/greenP.png" class="topping greenP" alt="img not found">
+    <img src="../public/images/onion.png" class="topping onion" alt="img not found">
+    <img src="../public/images/redP.png" class = "topping redP" alt="img not found">
+    <img src="../public/images/pin.png" class="topping pin" alt="img not found">
+    <img src="../public/images/ham.png" class="topping ham" alt="img not found">
 
 <script>
     $(document).ready(function () {
         $(".topping").hide();
-        var z = 1;
+        let z = 1;
         $(".add").click(function () {
             let pClass = $(this).closest('tr').attr('class');
             drop(".topping."+pClass);
