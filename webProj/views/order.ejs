@@ -1,10 +1,116 @@
 <%- include('parts/header.ejs') %>
+
 <%- include('parts/navbar.ejs') %>
 
-<div class="container">
-    <h1><%= name %></h1>
-
+<body>
+<div id="container">
+    <fieldset id="menu">
+        <legend>Menu</legend>
+        <table class="item">
+            <thead>
+            <th colspan="2">配料</th>
+            </thead>
+            <tbody>
+            <tr class = "onion">
+                <td>Onion</td>
+                <td>
+                    <button class="add">Add</button>
+                    <button class="remove">Remove</button>
+                </td>
+            </tr>
+            <tr class = "pepp">
+                <td>Pepperoni</td>
+                <td>
+                    <button class="add">Add</button>
+                    <button class="remove">Remove</button>
+                </td>
+            </tr>
+            <tr class = "greenP">
+                <td>Green Pepper</td>
+                <td>
+                    <button class="add">Add</button>
+                    <button class="remove">Remove</button>
+                </td>
+            </tr>
+            <tr class = "redP">
+                <td>Red Pepper</td>
+                <td>
+                    <button class="add">Add</button>
+                    <button class="remove">Remove</button>
+                </td>
+            </tr>
+            <tr class = "pin">
+                <td>Pineapple</td>
+                <td>
+                    <button class="add">Add</button>
+                    <button class="remove">Remove</button>
+                </td>
+            </tr>
+            <tr class = "ham">
+                <td>Ham</td>
+                <td>
+                    <button class="add">Add</button>
+                    <button class="remove">Remove</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </fieldset>
 </div>
+<div>
+    <fieldset id = "order">
+        <legend>Order</legend>
+    </fieldset>
+</div>
+<img src="/images/crust.png" id="crust" alt="img not found">
+<img src="/images/pepp.png" class="topping pepp" alt="img not found">
+<img src="/images/greenP.png" class="topping greenP" alt="img not found">
+<img src="/images/onion.png" class="topping onion" alt="img not found">
+<img src="/images/redP.png" class = "topping redP" alt="img not found">
+<img src="/images/pin.png" class="topping pin" alt="img not found">
+<img src="/images/ham.png" class="topping ham" alt="img not found">
+
+<script>
+    $(document).ready(function () {
+        $(".topping").hide();
+        let z = 1;
+        $(".add").click(function () {
+            let pClass = $(this).closest('tr').attr('class');
+            drop(".topping."+pClass);
+            $(this).attr("disabled", true);
+            $(this).addClass("disabled");
+
+        });
+        $(".remove").click(function () {
+            let pClass = $(this).closest('tr').attr('class');
+            remove(".topping."+pClass);
+            $(this).closest('button').prev().removeAttr("disabled");
+            $(this).closest('button').prev().removeClass("disabled");
+
+        });
+
+        function drop(ele) {
+            $(ele).show();
+            $(ele).css('z-index', z++);
+            $(ele).animate({
+                top: "30%",
+                height: "500px",
+                right: "0%"
+            }, 1000);
+
+        }
+
+        function remove(ele) {
+            $(ele).hide();
+            $(ele).css({
+                right: 0,
+                top: 0,
+                height: "250px",
+            })
+        }
+    });
+</script>
+
 
 <%- include('parts/foot.ejs') %>
 

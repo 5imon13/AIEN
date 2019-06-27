@@ -1,0 +1,17 @@
+#crust {
+    /*position: fixed;*/
+    /*right: 0;*/
+    top: 30%;
+    width: 500px;
+    height: 500px;
+    z-index: -1;
+}
+img.topping {
+    /*position: fixed;*/
+    /*right: 0;*/
+    top: 0;
+    width: 500px;
+    height: 200px;
+    z-index: 1;
+    /*opacity: 1;*/
+}

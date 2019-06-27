@@ -11,8 +11,12 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 
 app.get('/', function (req, res) {
-    res.render('order', {
-        name: 'Simon'
+    res.render('menu', {
+    });
+});
+
+app.get('/menu', function (req, res) {
+    res.render('menu', {
     });
 });
 
