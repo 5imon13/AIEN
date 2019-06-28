@@ -2,6 +2,8 @@ const express = require('express');
 const fs = require('fs');
 const url = require('url');
 const bodyParser = require('body-parser');
+const session = require('express-session');
+
 
 const app = express();
 
@@ -15,10 +17,23 @@ app.get('/', function (req, res) {
 });
 
 app.get('/menu', function (req, res) {
-    res.render('menu', {
-    });
+    res.render('menu');
 });
-
+app.post('/menu', function (req, res) {
+    //console.log(req.body.name+' '+!!req.body.pepp);
+    const data = {};
+    data.id = Math.round(Math.random()*1010111);
+    data.name = req.body.name;
+    data.cellNumber = req.body.cellNumber;
+    data.email = req.body.email;
+    data.ham = !!req.body.ham;
+    data.pepp = !!req.body.pepp;
+    data.onion = !!req.body.onion;
+    data.greenP = !!req.body.greenP;
+    data.redP = !!req.body.redP;
+    data.pin = !!req.body.pin;
+    res.render('success', data);
+});
 
 
 app.use((req, res) => {
