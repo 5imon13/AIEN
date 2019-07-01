@@ -1,4 +1,6 @@
 <%- include('parts/header.ejs') %>
+<title>Menu</title>
+</head>
 <body>
 <%- include('parts/navbar.ejs') %>
 <div class="container px-lg-3">
@@ -42,7 +44,7 @@
                             <div class="form-check">
                                 <input class="form-check-input topping" type="checkbox" id="pepp" name="pepp">
                                 <label class="form-check-label" for="pepp">
-                                    意識香腸
+                                    義式香腸
                                 </label>
                             </div>
                         </div>
@@ -65,15 +67,21 @@
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input topping" type="checkbox" id="redP" name="redP">
-                                <label class="form-check-label" for="redP">
-                                    甜椒
+                                <input class="form-check-input topping" type="checkbox" id="tom" name="tom">
+                                <label class="form-check-label" for=tom>
+                                    番茄
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input topping" type="checkbox" id="pin" name="pin">
+                                <input class="form-check-input topping" type="checkbox" id="pin" name="pin" >
                                 <label class="form-check-label" for="pin">
                                     鳳梨
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input topping" type="checkbox" id="mush" name="mush">
+                                <label class="form-check-label" for="mush">
+                                    蘑菇
                                 </label>
                             </div>
                         </div>
@@ -87,13 +95,16 @@
             </form>
         </div>
         <div class="col py-3 px-lg-5">
-            <img src="/realpizza/crust2.png" id="crust" alt="img not found">
+            <img src="/realpizza/crust.png" id="crust" alt="img not found">
             <img src="/realpizza/pepp.png" class="topping pepp" alt="img not found">
-            <img src="/realpizza/tom.png" class="topping greenP" alt="img not found">
-            <img src="/images/onion.png" class="topping onion" alt="img not found">
-            <img src="/images/redP.png" class = "topping redP" alt="img not found">
-            <img src="/realpizza/mush.png" class="topping pin" alt="img not found">
-            <img src="/images/ham.png" class="topping ham" alt="img not found">
+            <img src="/realpizza/greenP.png" class="topping greenP" alt="img not found">
+            <img src="/realpizza/onion.png" class="topping onion seeThrough" alt="img not found">
+            <img src="/realpizza/tom.png" class = "topping tom " alt="img not found">
+            <img src="/realpizza/pin.png" class="topping pin seeThrough" alt="img not found">
+            <img src="/realpizza/ham.png" class="topping ham" alt="img not found">
+            <img src="/realpizza/mush.png" class="topping mush" alt="img not found">
+<!--            <img src="/images/onion.png" class="topping onion" alt="img not found">-->
+
         </div>
     </div>
 </div>

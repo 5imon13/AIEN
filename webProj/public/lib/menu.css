@@ -13,7 +13,7 @@ img.topping {
     width: 500px;
     height: 200px;
     z-index: 1;
-    /*opacity: 1;*/
+    opacity: 0.9;
 }
 /*body{*/
 /*    background-color:lightblue;*/
@@ -26,4 +26,7 @@ form{
 div.success{
     font-family: "Helvetica Neue";
     font-size: larger;
+}
+img.seeThrough{
+    opacity: 0.76
 }
