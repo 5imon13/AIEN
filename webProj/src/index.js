@@ -3,6 +3,15 @@ const fs = require('fs');
 const url = require('url');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const moment = require('moment-timezone')
+const mysql = require('mysql');
+var db = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'root',
+    database: 'webproj'
+});
+db.connect();
 
 
 const app = express();
@@ -22,7 +31,7 @@ app.get('/menu', function (req, res) {
 app.post('/menu', function (req, res) {
     //console.log(req.body.name+' '+!!req.body.pepp);
     const data = {};
-    data.id = Math.round(Math.random()*1010111);
+    data.id = Math.round(Math.random() * 1010111);
     data.name = req.body.name;
     data.cellNumber = req.body.cellNumber;
     data.email = req.body.email;
@@ -34,7 +43,26 @@ app.post('/menu', function (req, res) {
     data.pin = !!req.body.pin;
     res.render('success', data);
 });
+app.get('/lookup', function (req, res) {
+    res.render('lookup');
+});
+app.post('/lookup', function (req, res) {
+    const sql = "SELECT * FROM `order` WHERE oid = "+ parseInt(req.body.oid);
+    var data={};
+    db.query(sql, (error, results) => {
+        if (error) {
+            throw error;
+        } else {
+            data.success = true;
+            results[0].odate = moment(results[0].odate).format('YYYY-MM-DD hh:mm');
+            res.render('lookup', {
+                order: results
+            });
+        }
 
+    });
+
+});
 
 app.use((req, res) => {
     res.type('text/html');
