@@ -16,8 +16,8 @@ img.topping {
     opacity: 0.9;
 }
 form.menu{
-    background-color:lightblue;
-    border: 2px solid steelblue;
+    /*background-color:lightblue;*/
+    /*border: 2px solid steelblue;*/
     padding: 10px;
 }
 div.success{
