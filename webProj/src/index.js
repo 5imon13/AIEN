@@ -47,20 +47,31 @@ app.get('/lookup', function (req, res) {
     res.render('lookup');
 });
 app.post('/lookup', function (req, res) {
-    const sql = "SELECT * FROM `order` WHERE oid = "+ parseInt(req.body.oid);
-    var data={};
-    db.query(sql, (error, results) => {
-        if (error) {
-            throw error;
-        } else {
-            data.success = true;
-            results[0].odate = moment(results[0].odate).format('YYYY-MM-DD hh:mm');
-            res.render('lookup', {
-                order: results
-            });
-        }
+    const sql = "SELECT * FROM `order` WHERE oid = ?;";
+    var data = {
+        success: false,
+        info: '',
+        body: '',
+    };
+    db.query(sql, [req.body.oid],
+        (error, results) => {
+            if (error) {
+                data.success = false;
+                info: 'Error';
 
-    });
+            } else {
+                if (results.length > 0) {
+                    results[0].odate = moment(results[0].odate).format('YYYY-MM-DD hh:mm');
+                    data.success = true;
+                    data.body = results[0];
+                    info: 'Success';
+                }
+                // res.render('lookup', {
+                //     order: results
+                // }
+            }
+            res.json(data);
+        });
 
 });
 
