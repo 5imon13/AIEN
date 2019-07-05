@@ -30,8 +30,11 @@ app.get('/menu', function (req, res) {
 });
 app.post('/menu', function (req, res) {
     //console.log(req.body.name+' '+!!req.body.pepp);
-    const data = {};
-    data.id = Math.round(Math.random() * 1010111);
+    const data = {
+        success: false,
+        info: '',
+    };
+    data.id = Math.round(Math.random() * 101111);
     data.name = req.body.name;
     data.cellNumber = req.body.cellNumber;
     data.email = req.body.email;
@@ -41,7 +44,32 @@ app.post('/menu', function (req, res) {
     data.greenP = !!req.body.greenP;
     data.redP = !!req.body.redP;
     data.pin = !!req.body.pin;
-    res.render('success', data);
+    data.mush = !!req.body.mush;
+
+
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var dateTime = date+' '+time;
+    const meat = (data.ham? 'h':'')+(data.pepp? 'p':'');
+    const veggie = (data.onion? 'o':'')+(data.greenP? 'g':'')+(data.redP? 'r':'')+(data.pin? 'p':'')+(data.mush? 'm':'');
+    const sql = 'INSERT INTO `order` VALUES(?,?,?,?,?,?,?)';
+    db.query(sql,
+        [data.id, data.name,data.email, data.cellNumber, dateTime, meat, veggie],
+        (error, results)=>{
+            if(error){
+                data.info = '新增資料失敗';
+                res.render('home');
+
+            }else{
+                if (results.affectedRows === 1) {
+                    data.info = '新增資料成功';
+                    data.success = true;
+                    res.render('success', data);
+                }
+
+            }
+        });
 });
 app.get('/lookup', function (req, res) {
     res.render('lookup');

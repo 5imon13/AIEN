@@ -39,9 +39,9 @@
         $(".topping").text('');
         var isPass = true;
 
-        if (!/^\d{6}$/.test($oid.val())) {
+        if (!/^\d{5}$/.test($oid.val())) {
             isPass = false;
-            $msg.text('Order#格式不符，必須為六位數字');
+            $msg.text('Order#格式不符，必須為五位數字');
             $msg.css('color','red');
             btn.show();
             return false;
