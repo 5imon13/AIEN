@@ -6,28 +6,26 @@
         <div class="input-group mb-3 ">
             <input type="text" class="form-control border-dark " placeholder="Order#" id='oid' name='oid' >
             <div class="input-group-append">
-                <button class="btn btn-outline-secondary border-dark" type="submit" ><i class="fas fa-search"></i> <b>Search</b></button>
+                <button class="btn btn-outline-secondary border-dark" type="submit"> <i class="fas fa-search"></i> <b>Search</b></button>
             </div>
         </div>
-        <p id="oidHelp" class="form-text text-muted"></p>
+        <p id="oidHelp" class="form-text"></p>
     </form>
     <div class="card border-dark mb-3  text-white bg-secondary" style="max-width: 30rem;">
         <div class="card-header">
-            <h3>Order#: <span class='oid text-monospace'></span><i class="fas fa-pizza-slice"></i></h3>
+            <h3>Order#: <span class='oid text-monospace'></span> <i class="fas fa-pizza-slice"></i></h3>
         </div>
         <div class="card-body  text-white bg-secondary">
             <h5 class="card-title ">訂單資料:</h5>
-            <p class="card-text-weight-bold container ">
+            <p class="card-text-weight-bold container text-monospace ">
                 姓名: <span class='name'></span> <br>
                 E-mail: <span class='email'></span> <br>
-                手機號碼: <span class='cellnumber'></span> <br>
+                行動電話: <span class='cellnumber'></span> <br>
                 下單時間: <span class='odate'></span> <br>
-                配料:
+                配料: <span class ="topping"></span>
             </p>
         </div>
-
     </div>
-
 </div>
 <script>
     var $oid = $("#oid");
@@ -38,6 +36,7 @@
         $msg.text('');
         $msg.css('color','white');
         btn.hide();
+        $(".topping").text('');
         var isPass = true;
 
         if (!/^\d{6}$/.test($oid.val())) {
@@ -47,7 +46,6 @@
             btn.show();
             return false;
         }
-
         if (isPass) {
             $.post('/lookup', $(document.forms[0]).serialize(), function (data) {
                 console.log(data);
@@ -57,14 +55,30 @@
                     $(".cellnumber").text((data.body.cellnumber));
                     $(".odate").text((data.body.odate));
                     $(".email").text((data.body.email));
-
-
-
+                    //$(".topping").text((data.body.meat)+','+(data.body.veggie));
+                    parseTop($(".topping"),data.body.meat, data.body.veggie);
                 }
             },'json');
         }
         btn.show();
         return false;
     };
+    function parseTop($top, meat, veggie){
+        mObj = {'h':'火腿', 'p':'義式香腸'};
+        vObj = {'o':'洋蔥', 'g':'青椒', 'r':'甜椒','p':'鳳梨', 'm':'蘑菇'}
+        meatList = meat.split('');
+        vegList = veggie.split('');
+        for(var m in meatList){
+            if(mObj[meatList[m]]!= null){
+                $top.append(mObj[meatList[m]]+'、');
+            }
+        }
+        for(var v in vegList){
+            if(vObj[vegList[v]]!= null){
+                $top.append(vObj[vegList[v]]+'、');
+            }
+        }
+        $top.text( $top.text().slice(0,-1));
+    }
 </script>
 <%- include('parts/foot.ejs') %>

@@ -2,108 +2,95 @@
 
 <body>
 <%- include('parts/navbar.ejs') %>
-<div class="container px-lg-3">
-    <div class="row mx-lg-n5 ">
-        <div class="col py-3 px-lg-5 ">
-            <form class="rounded menu text-white bg-secondary" method="post">
-                <div class="form-group row">
-                    <label class=" col-sm col-form-label"><h3>基本資料</h3></label>
-                </div>
-                <div class="form-group row">
-                    <label for="name" class="col-sm-2 col-form-label">姓名:</label>
-                    <div class="col-sm-8">
-                        <input type=text class="form-control" id="name" placeholder="姓名" name = 'name' required>
+<div class="container ">
+    <div class="row ">
+        <div class="col py-3 px-3 ">
+            <form class="rounded " method="post">
+                <div class='card text-white bg-secondary '>
+                    <h5 class="card-header text-left"><b>基本資料</b></h5>
+                    <div class="card-body">
+                        <div class="card-text form-group row pl-5">
+                            <label for="name" class="col-sm-2 col-form-label ">姓名:</label>
+                            <div class="col-sm-8">
+                                <input type=text class="form-control" id="name" placeholder="姓名" name='name' required>
+                            </div>
+                        </div>
+                        <div class="form-group row pl-5">
+                            <label for="cellNumber" class="col-sm-2 col-form-label ">電話:</label>
+                            <div class="col-sm-8">
+                                <input type=text class="form-control" id="cellNumber" placeholder="行動電話"
+                                       name='cellNumber'>
+                            </div>
+                        </div>
+                        <div class="form-group row pl-5">
+                            <label for="email" class="col-sm-2 col-form-label ">Email:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="email" placeholder="Email" name='email'
+                                       required>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label for="cellNumber" class="col-sm-2 col-form-label">電話:</label>
-                    <div class="col-sm-8">
-                        <input type=text class="form-control" id="cellNumber" placeholder="電話號碼" name = 'cellNumber' >
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="email" class="col-sm-2 col-form-label">Email:</label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control" id="email" placeholder="Email" name = 'email' required>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class=" col-sm col-form-label"><b>配料</b></label>
-                </div>
-                <fieldset class="form-group">
-                    <div class="row">
-                        <legend class="col-form-label col-sm-2 pt-0 topping">肉類</legend>
-                        <div class="col-sm-10">
-                            <div class="form-check">
+                <div class='card text-white bg-dark'>
+                    <h5 class="card-header text-left"><b>配料</b></h5>
+                    <div class="card-body text-center">
+                        <h6 class="card-title font-weight-bold">肉類</h6>
+                        <div class="form-group row ">
+                            <div class="col-sm-6 form-check">
                                 <input class="form-check-input topping" type="checkbox" id="ham" name="ham">
-                                <label class="form-check-label" for="ham">
-                                    火腿
-                                </label>
+                                <label class="form-check-label" for="ham">火腿</label>
                             </div>
-                            <div class="form-check">
+                            <div class="col-sm-6 form-check">
                                 <input class="form-check-input topping" type="checkbox" id="pepp" name="pepp">
-                                <label class="form-check-label" for="pepp">
-                                    義式香腸
-                                </label>
+                                <label class="form-check-label" for="pepp">義式香腸</label>
                             </div>
                         </div>
-                    </div>
-                </fieldset>
-                <fieldset class="form-group">
-                    <div class="row">
-                        <legend class="col-form-label col-sm-2 pt-0 topping">蔬菜類</legend>
-                        <div class="col-sm-10">
-                            <div class="form-check">
+                        <h6 class="card-title font-weight-bold">蔬菜類</h6>
+                        <div class="form-group row ">
+                            <div class="col-sm-6 form-check">
                                 <input class="form-check-input topping" type="checkbox" id="onion" name="onion">
-                                <label class="form-check-label" for="onion">
-                                    洋蔥
-                                </label>
+                                <label class="form-check-label" for="onion">洋蔥</label>
                             </div>
-                            <div class="form-check">
+                            <div class="col-sm-6 form-check">
                                 <input class="form-check-input topping" type="checkbox" id="greenP" name="greenP">
-                                <label class="form-check-label" for="greenP">
-                                    青椒
-                                </label>
+                                <label class="form-check-label" for="greenP">青椒</label>
                             </div>
-                            <div class="form-check">
+                        </div>
+                        <div class="form-group row ">
+                            <div class="col-sm-6 form-check">
                                 <input class="form-check-input topping" type="checkbox" id="tom" name="tom">
-                                <label class="form-check-label" for=tom>
-                                    番茄
-                                </label>
+                                <label class="form-check-label" for=tom>甜椒</label>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input topping" type="checkbox" id="pin" name="pin" >
-                                <label class="form-check-label" for="pin">
-                                    鳳梨
-                                </label>
+                            <div class="col-sm-6 form-check">
+                                <input class="form-check-input topping" type="checkbox" id="pin" name="pin">
+                                <label class="form-check-label" for="pin">鳳梨</label>
                             </div>
-                            <div class="form-check">
+                        </div>
+                        <div class="form-group row ">
+                            <div class="col-sm-6 form-check">
                                 <input class="form-check-input topping" type="checkbox" id="mush" name="mush">
-                                <label class="form-check-label" for="mush">
-                                    蘑菇
-                                </label>
+                                <label class="form-check-label" for="mush">蘑菇</label>
                             </div>
                         </div>
                     </div>
-                </fieldset>
-                <div class="form-group row">
-                    <div class="col-sm-10">
-                        <button type="submit" class="btn btn-dark btn-outline-light">送出訂單</button>
+                    <div class="form card-footer text-right">
+                        <div class="col ">
+                            <button type="submit" class="btn btn-secondary btn-outline-light">送出訂單</button>
+                        </div>
                     </div>
                 </div>
             </form>
         </div>
-        <div class="col py-3 px-lg-5">
+        <div class="col py-3 px-3 ">
             <img src="/realpizza/crust2.png" id="crust" alt="img not found">
             <img src="/realpizza/pepp.png" class="topping pepp" alt="img not found">
             <img src="/realpizza/greenP.png" class="topping greenP" alt="img not found">
             <img src="/realpizza/onion.png" class="topping onion seeThrough" alt="img not found">
-            <img src="/realpizza/tom.png" class = "topping tom " alt="img not found">
+            <img src="/realpizza/redP.png" class="topping redP " alt="img not found">
             <img src="/realpizza/pin.png" class="topping pin seeThrough" alt="img not found">
             <img src="/realpizza/ham.png" class="topping ham" alt="img not found">
             <img src="/realpizza/mush.png" class="topping mush" alt="img not found">
-<!--            <img src="/images/onion.png" class="topping onion" alt="img not found">-->
-
+            <!--            <img src="/images/onion.png" class="topping onion" alt="img not found">-->
         </div>
     </div>
 </div>
@@ -113,14 +100,13 @@
         $("img.topping").hide();
         let z = 1;
         $(".topping").change(function () {
-            var ischecked= $(this).is(':checked');
-            if(ischecked){
+            var ischecked = $(this).is(':checked');
+            if (ischecked) {
                 let pClass = $(this).attr('id');
-                drop("img.topping."+pClass);
-            }
-            else{
+                drop("img.topping." + pClass);
+            } else {
                 let pClass = $(this).attr('id');
-                remove("img.topping."+pClass);
+                remove("img.topping." + pClass);
             }
         });
 
@@ -132,9 +118,7 @@
                 height: "500px",
                 right: "0%"
             }, 1000);
-
         }
-
         function remove(ele) {
             $(ele).hide();
             $(ele).css({
