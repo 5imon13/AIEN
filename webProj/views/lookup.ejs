@@ -2,9 +2,29 @@
 <body>
 <%- include('parts/navbar.ejs') %>
 <div class="container font py-3 px-3">
+    <style>
+        .active{
+
+            background-color:  #868e96 !important;
+
+        }
+    </style>
+
+    <ul class="nav nav-pills ">
+        <li class="nav-item ">
+            <a class="nav-link active"  data-toggle="pill" id = 'o'>Order#</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"  data-toggle="pill" id = 'c'>電話</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"  data-toggle="pill" id = 'e'>E-mail</a>
+        </li>
+    </ul>
+
     <form method="post" onsubmit= " return checkForm()">
         <div class="input-group mb-3 ">
-            <input type="text" class="form-control border-dark " placeholder="Order#" id='oid' name='oid' >
+            <input type="text" class="form-control border-dark " id='oid' name='oid' placeholder="請輸入Order#查詢">
             <div class="input-group-append">
                 <button class="btn btn-outline-secondary border-dark" type="submit"> <i class="fas fa-search"></i> <b>Search</b></button>
             </div>
@@ -13,14 +33,14 @@
     </form>
     <div class="card border-dark mb-3  text-white bg-secondary" style="max-width: 30rem;">
         <div class="card-header">
-            <h3>Order#: <span class='oid text-monospace'></span> <i class="fas fa-pizza-slice"></i></h3>
+            <h3>訂單資料 <i class="fas fa-pizza-slice"></i></h3>
         </div>
         <div class="card-body  text-white bg-secondary">
-            <h5 class="card-title ">訂單資料:</h5>
+            <h5 class="card-title  ">Order#: <span class='text-monospace oid'></span> </h5>
             <p class="card-text-weight-bold container text-monospace ">
                 姓名: <span class='name'></span> <br>
                 E-mail: <span class='email'></span> <br>
-                行動電話: <span class='cellnumber'></span> <br>
+                行動電話: <span class='cellphone'></span> <br>
                 下單時間: <span class='odate'></span> <br>
                 配料: <span class ="topping"></span>
             </p>
@@ -30,8 +50,27 @@
 <script>
     var $oid = $("#oid");
     var btn = $(".btn");
-    var $msg = $("#oidHelp")
+    var $msg = $("#oidHelp");
+    var method = 'oid';
 
+    $(document).ready(function() {
+        $("li>a").click(function () {
+            switch(this.id){
+                case 'o':
+                    $("#oid").attr('placeholder', '請輸入Order#查詢');
+                    method= 'oid';
+                    break;
+                case 'c':
+                    $("#oid").attr('placeholder', '請輸入電話查詢');
+                    method= 'cellphone';
+                    break;
+                case 'e':
+                    $("#oid").attr('placeholder', '請輸入E-mail查詢');
+                    method= 'email';
+                    break;
+            }
+        });
+    });
     function checkForm(){
         $msg.text('');
         $msg.css('color','white');
@@ -39,7 +78,7 @@
         $(".topping").text('');
         var isPass = true;
 
-        if (!/^\d{5}$/.test($oid.val())) {
+        if (method == 'oid' && !/^\d{5}$/.test($oid.val())) {
             isPass = false;
             $msg.text('Order#格式不符，必須為五位數字');
             $msg.css('color','red');
@@ -47,16 +86,24 @@
             return false;
         }
         if (isPass) {
-            $.post('/lookup', $(document.forms[0]).serialize(), function (data) {
+            var body = $(document.forms[0]).serializeArray();
+            body.push({name:'method',value: method});
+            $.post('/lookup', body, function (data) {
                 console.log(data);
                 if (data.success) {
                     $(".oid").text((data.body.oid));
                     $(".name").text((data.body.name));
-                    $(".cellnumber").text((data.body.cellnumber));
+                    $(".cellphone").text((data.body.cellphone));
                     $(".odate").text((data.body.odate));
                     $(".email").text((data.body.email));
                     //$(".topping").text((data.body.meat)+','+(data.body.veggie));
                     parseTop($(".topping"),data.body.meat, data.body.veggie);
+                }
+                else{
+                    if(data.info = 'Fail'){
+                        $msg.text('查詢的訂單不存在');
+                        $msg.css('color','red');
+                    }
                 }
             },'json');
         }

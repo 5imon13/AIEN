@@ -36,7 +36,7 @@ app.post('/menu', function (req, res) {
     };
     data.id = Math.round(Math.random() * 101111);
     data.name = req.body.name;
-    data.cellNumber = req.body.cellNumber;
+    data.cellphone = req.body.cellphone;
     data.email = req.body.email;
     data.ham = !!req.body.ham;
     data.pepp = !!req.body.pepp;
@@ -55,7 +55,7 @@ app.post('/menu', function (req, res) {
     const veggie = (data.onion? 'o':'')+(data.greenP? 'g':'')+(data.redP? 'r':'')+(data.pin? 'p':'')+(data.mush? 'm':'');
     const sql = 'INSERT INTO `order` VALUES(?,?,?,?,?,?,?)';
     db.query(sql,
-        [data.id, data.name,data.email, data.cellNumber, dateTime, meat, veggie],
+        [data.id, data.name,data.email, data.cellphone, dateTime, meat, veggie],
         (error, results)=>{
             if(error){
                 data.info = '新增資料失敗';
@@ -75,28 +75,35 @@ app.get('/lookup', function (req, res) {
     res.render('lookup');
 });
 app.post('/lookup', function (req, res) {
-    const sql = "SELECT * FROM `order` WHERE oid = ?;";
+    console.log(req.body);
+    const sql = "SELECT * FROM `order` WHERE ?? = ? ;";
     var data = {
         success: false,
         info: '',
         body: '',
     };
-    db.query(sql, [req.body.oid],
+    db.query(sql, [ req.body.method, req.body.oid],
         (error, results) => {
             if (error) {
                 data.success = false;
                 info: 'Error';
-
             } else {
+                // console.log(results);
+                // Object.keys(results).forEach(function(key) {
+                //     var row = results[key];
+                //     console.log((JSON.parse(JSON.stringify(row))));
+                // });
                 if (results.length > 0) {
                     results[0].odate = moment(results[0].odate).format('YYYY-MM-DD hh:mm');
                     data.success = true;
                     data.body = results[0];
                     info: 'Success';
                 }
-                // res.render('lookup', {
-                //     order: results
-                // }
+                else{
+                    info:'Fail';
+                    data.success = false;
+                }
+
             }
             res.json(data);
         });
