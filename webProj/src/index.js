@@ -34,7 +34,7 @@ app.post('/menu', function (req, res) {
         success: false,
         info: '',
     };
-    data.id = Math.round(Math.random() * 101111);
+    data.id = Math.floor(Math.random()*90000) + 10000;
     data.name = req.body.name;
     data.cellphone = req.body.cellphone;
     data.email = req.body.email;
@@ -45,8 +45,7 @@ app.post('/menu', function (req, res) {
     data.redP = !!req.body.redP;
     data.pin = !!req.body.pin;
     data.mush = !!req.body.mush;
-
-
+    // console.log(req.body);
     var today = new Date();
     var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
@@ -88,24 +87,24 @@ app.post('/lookup', function (req, res) {
                 data.success = false;
                 info: 'Error';
             } else {
-                // console.log(results);
-                // Object.keys(results).forEach(function(key) {
-                //     var row = results[key];
-                //     console.log((JSON.parse(JSON.stringify(row))));
-                // });
-                if (results.length > 0) {
-                    results[0].odate = moment(results[0].odate).format('YYYY-MM-DD hh:mm');
-                    data.success = true;
-                    data.body = results[0];
-                    info: 'Success';
-                }
-                else{
-                    info:'Fail';
-                    data.success = false;
-                }
-
+                //console.log(results);
+                Object.keys(results).forEach(function(key) {
+                    var row = results[key];
+                    console.log((JSON.parse(JSON.stringify(row))));
+                });
+            //     if (results.length > 0) {
+            //         results[0].odate = moment(results[0].odate).format('YYYY-MM-DD hh:mm');
+            //         data.success = true;
+            //         data.body = results[0];
+            //         info: 'Success';
+            //     }
+            //     else{
+            //         info:'Fail';
+            //         data.success = false;
+            //     }
+            //
             }
-            res.json(data);
+            // res.json(data);
         });
 
 });
