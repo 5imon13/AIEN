@@ -44,7 +44,21 @@
                 配料: <span class ="topping"></span>
             </p>
         </div>
+        <table class="table table-striped text-white">
+            <thead >
+            <th scope="col">Order#</th>
+            <th scope="col">姓名</th>
+            <th scope="col">E-mail</th>
+            <th scope="col">行動電話</th>
+            <th scope="col">下單時間</th>
+            <th scope="col">配料</th>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
     </div>
+
 </div>
 <script>
     var $oid = $("#oid");
@@ -69,6 +83,7 @@
                     break;
             }
         });
+        $('table').hide();
     });
     function checkForm(){
         $msg.text('');
@@ -90,13 +105,35 @@
             $.post('/lookup', body, function (data) {
                 console.log(data);
                 if (data.success) {
-                    $(".oid").text((data.body.oid));
-                    $(".name").text((data.body.name));
-                    $(".cellphone").text((data.body.cellphone));
-                    $(".odate").text((data.body.odate));
-                    $(".email").text((data.body.email));
-                    //$(".topping").text((data.body.meat)+','+(data.body.veggie));
-                    parseTop($(".topping"),data.body.meat, data.body.veggie);
+                    if(data.method == 'oid'){
+                        $('table').hide();
+                        $('.card').css({'max-width':'30rem'});
+                        $('.card-body').show();
+                        $(".oid").text((data.body[0].oid));
+                        $(".name").text((data.body[0].name));
+                        $(".cellphone").text((data.body[0].cellphone));
+                        $(".odate").text((data.body[0].odate));
+                        $(".email").text((data.body[0].email));
+                        parseTop($(".topping"),data.body[0].meat, data.body[0].veggie);
+                    }
+                    else{
+                        $('table').show();
+                        $('.card').css({'max-width':''});
+                        $('.card-body').hide();
+                        for(var query of data.body){
+                            $("tbody").after(`<tr scope="row">
+                            <td>${query.oid}</td>
+                            <td>${query.name}</td>
+                            <td>${query.email}</td>
+                            <td>${query.cellphone}</td>
+                            <td>${query.odate}</td>
+                            <td></td>
+                        </tr>`);
+                            parseTop($("td").eq(5),query.meat, query.veggie);
+                        }
+
+                    }
+
                 }
                 else{
                     if(data.info = 'Fail'){

@@ -78,33 +78,33 @@ app.post('/lookup', function (req, res) {
     const sql = "SELECT * FROM `order` WHERE ?? = ? ;";
     var data = {
         success: false,
-        info: '',
+        method: req.body.method,
         body: '',
     };
+    var result = [];
     db.query(sql, [ req.body.method, req.body.oid],
         (error, results) => {
             if (error) {
                 data.success = false;
-                info: 'Error';
             } else {
                 //console.log(results);
-                Object.keys(results).forEach(function(key) {
-                    var row = results[key];
-                    console.log((JSON.parse(JSON.stringify(row))));
-                });
-            //     if (results.length > 0) {
-            //         results[0].odate = moment(results[0].odate).format('YYYY-MM-DD hh:mm');
-            //         data.success = true;
-            //         data.body = results[0];
-            //         info: 'Success';
-            //     }
-            //     else{
-            //         info:'Fail';
-            //         data.success = false;
-            //     }
-            //
+                if (results.length > 0) {
+                    Object.keys(results).forEach(function(key) {
+                        var row = results[key];
+                        row.odate = moment(results[0].odate).format('YYYY-MM-DD hh:mm')
+                        //console.log(typeof (JSON.parse(JSON.stringify(row))));
+                        result.push(JSON.parse(JSON.stringify(row)));
+                    });
+                    //results[0].odate = moment(results[0].odate).format('YYYY-MM-DD hh:mm');
+                    data.success = true;
+                    data.body = result;
+                }
+                else{
+                    data.success = false;
+                }
+
             }
-            // res.json(data);
+            res.json(data);
         });
 
 });
