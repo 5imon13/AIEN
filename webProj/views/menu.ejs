@@ -4,7 +4,7 @@
 <%- include('parts/navbar.ejs') %>
 <div class="container ">
     <div class="row ">
-        <div class="col py-3 px-3 ">
+        <div class="col my-3 mx-1 ">
             <form class="rounded " method="post">
                 <div class='card text-white bg-dark border-secondary'>
                     <h6 class="card-header text-left "><b>基本資料</b></h6>
@@ -25,7 +25,7 @@
                         <div class="form-group row pl-5">
                             <label for="email" class="col-lg-2 col-form-label ">Email:</label>
                             <div class="col-lg-8">
-                                <input type="text" class="form-control" id="email" placeholder="Email" name='email'
+                                <input type="email" class="form-control" id="email" placeholder="Email" name='email'
                                        required>
                             </div>
                         </div>
@@ -56,7 +56,7 @@
                         </div>
                     </div>
                 </div>
-                <div class='card text-white bg-dark border-secondary'>
+                <div class='card text-white bg-dark border-secondary '>
                     <h6 class="card-header text-left"><b>客製配料</b></h6>
                     <div class="card-body text-center">
                         <!--                        <h6 class="card-title font-weight-bold">肉類</h6>-->
@@ -98,7 +98,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form card-footer text-right">
+                    <div class="form card-footer text-right ">
                         <div class="col ">
                             <button type="submit" class="btn btn-secondary btn-outline-light mr-2"
                                     onclick="checkForm()">送出訂單
@@ -109,12 +109,12 @@
                 </div>
             </form>
         </div>
-        <div class="col py-3 px-3 ">
+        <div class="col my-3 mx-1 ">
             <img src="/realpizza/crust.png" id="crust" alt="img not found">
             <img src="/realpizza/pepp.png" class="topping pepp" alt="img not found">
             <img src="/realpizza/greenP.png" class="topping greenP" alt="img not found">
             <img src="/realpizza/onion.png" class="topping onion " alt="img not found">
-            <img src="/realpizza/redP1.png" class="topping redP " alt="img not found">
+            <img src="/realpizza/redP.png" class="topping redP " alt="img not found">
             <img src="/realpizza/pin.png" class="topping pin " alt="img not found">
             <img src="/realpizza/ham.png" class="topping ham" alt="img not found">
             <img src="/realpizza/mush.png" class="topping mush" alt="img not found">
