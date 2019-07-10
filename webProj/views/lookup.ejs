@@ -1,167 +1,201 @@
 <%- include('parts/header.ejs') %>
 <body>
 <%- include('parts/navbar.ejs') %>
-<div class="container font py-3 px-3">
+<div class="container font py-3 px-1">
     <style>
-        .active{
-
-            background-color:  #868e96 !important;
+        .active {
+            background-color: #868e96 !important;
         }
     </style>
-
     <ul class="nav nav-pills ">
         <li class="nav-item ">
-            <a class="nav-link active"  data-toggle="pill" id = 'o'>Order#</a>
+            <a class="nav-link active" data-toggle="pill" id='o'>Order#</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link"  data-toggle="pill" id = 'c'>電話</a>
+            <a class="nav-link" data-toggle="pill" id='c'>電話</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link"  data-toggle="pill" id = 'e'>E-mail</a>
+            <a class="nav-link" data-toggle="pill" id='e'>E-mail</a>
         </li>
     </ul>
-
-    <form method="post" onsubmit= " return checkForm()">
-        <div class="input-group mb-3 ">
+    <form method="post" onsubmit=" return checkForm()">
+        <div class="input-group ">
             <input type="text" class="form-control border-dark " id='oid' name='oid' placeholder="請輸入Order#查詢">
             <div class="input-group-append">
-                <button class="btn btn-outline-secondary border-dark" type="submit"> <i class="fas fa-search"></i> <b>Search</b></button>
+                <button class="btn btn-outline-secondary border-dark" type="submit"><i class="fas fa-search"></i> <b>Search</b>
+                </button>
             </div>
         </div>
         <p id="oidHelp" class="form-text"></p>
     </form>
-    <div class="card border-dark mb-3  text-white bg-secondary" style="max-width: 30rem;">
+    <div class="card border-dark text-white bg-secondary" style="max-width: 30rem;">
         <div class="card-header">
             <h3>訂單資料 <i class="fas fa-pizza-slice"></i></h3>
         </div>
         <div class="card-body  text-white bg-secondary">
-            <h5 class="card-title  ">Order#: <span class='text-monospace oid'></span> </h5>
+            <h5 class="card-title  ">Order#: <span class='text-monospace oid'></span></h5>
             <p class="card-text-weight-bold container text-monospace ">
                 姓名: <span class='name'></span> <br>
                 E-mail: <span class='email'></span> <br>
                 行動電話: <span class='cellphone'></span> <br>
                 下單時間: <span class='odate'></span> <br>
-                配料: <span class ="topping"></span>
+                配料: <span class="topping"></span>
             </p>
         </div>
-        <table class="table table-striped text-white">
-            <thead >
-            <th scope="col">Order#</th>
-            <th scope="col">姓名</th>
-            <th scope="col">E-mail</th>
-            <th scope="col">行動電話</th>
-            <th scope="col">下單時間</th>
-            <th scope="col">配料</th>
+        <table class="table table-striped table-dark mb-0">
+            <thead>
+                <tr>
+                    <th scope="col">Order#</th>
+                    <th scope="col">姓名</th>
+                    <th scope="col">E-mail</th>
+                    <th scope="col">行動電話</th>
+                    <th scope="col">下單時間</th>
+                    <th scope="col">配料</th>
+                </tr>
             </thead>
             <tbody>
             </tbody>
         </table>
-
+        <div class='card-footer text-right'></div>
     </div>
-
 </div>
 <script>
     var $oid = $("#oid");
     var btn = $(".btn");
     var $msg = $("#oidHelp");
     var method = 'oid';
-
-    $(document).ready(function() {
+    var $card = $('.card');
+    $('table').hide();
+    $('.card').hide();
+    $(document).ready(function () {
         $("li>a").click(function () {
-            switch(this.id){
+            switch (this.id) {
                 case 'o':
-                    $("#oid").attr('placeholder', '請輸入Order#查詢');
-                    method= 'oid';
+                    $oid.attr('placeholder', '請輸入Order#查詢');
+                    method = 'oid';
+                    $oid.attr('type', 'text');
                     break;
                 case 'c':
-                    $("#oid").attr('placeholder', '請輸入電話查詢');
-                    method= 'cellphone';
+                    $oid.attr('placeholder', '請輸入電話查詢');
+                    method = 'cellphone';
+                    $oid.attr('type', 'text');
                     break;
                 case 'e':
-                    $("#oid").attr('placeholder', '請輸入E-mail查詢');
-                    method= 'email';
+                    $oid.attr('placeholder', '請輸入E-mail查詢');
+                    method = 'email';
+                    $oid.attr('type', 'email');
                     break;
             }
         });
-        $('table').hide();
+
     });
-    function checkForm(){
+
+    function checkForm() {
         $msg.text('');
-        $msg.css('color','white');
+        $msg.css('color', 'white');
         btn.hide();
         $(".topping").text('');
         var isPass = true;
-
-        if (method == 'oid' && !/^\d{5}$/.test($oid.val())) {
+        if (method === 'oid' && !/^\d{5}$/.test($oid.val())) {
             isPass = false;
             $msg.text('Order#格式不符，必須為五位數字');
-            $msg.css('color','red');
+            $msg.css('color', 'red');
             btn.show();
             return false;
         }
+        if (method === 'cellphone' && !/^\d{10}$/.test($oid.val())) {
+            isPass = false;
+            $msg.text('電話格式不符，必須為十位數字');
+            $msg.css('color', 'red');
+            btn.show();
+            return false;
+        }
+
         if (isPass) {
             var body = $(document.forms[0]).serializeArray();
-            body.push({name:'method',value: method});
+            body.push({name: 'method', value: method});
             $.post('/lookup', body, function (data) {
                 console.log(data);
                 if (data.success) {
-                    if(data.method == 'oid'){
+                    if (data.method === 'oid') {
                         $('table').hide();
-                        $('.card').css({'max-width':'30rem'});
+                        $card.css({'max-width': '30rem'});
+                        $card.show();
                         $('.card-body').show();
                         $(".oid").text((data.body[0].oid));
                         $(".name").text((data.body[0].name));
                         $(".cellphone").text((data.body[0].cellphone));
                         $(".odate").text((data.body[0].odate));
                         $(".email").text((data.body[0].email));
-                        parseTop($(".topping"),data.body[0].meat, data.body[0].veggie);
-                    }
-                    else{
-                        $('table').show();
-                        $('.card').css({'max-width':''});
+                        parseTop($(".topping"), data.body[0].meat, data.body[0].veggie);
+                    } else {
+                        $card.css({'max-width': ''});
                         $('.card-body').hide();
-                        for(var query of data.body){
-                            $("tbody").after(`<tr scope="row">
-                            <td>${query.oid}</td>
+                        $('table').show();
+                        $('tbody').empty();
+                        for (var query of data.body) {
+                            $("tbody").append(`<tr>
+                            <td scope="row">${query.oid}</td>
                             <td>${query.name}</td>
                             <td>${query.email}</td>
                             <td>${query.cellphone}</td>
                             <td>${query.odate}</td>
-                            <td></td>
+                            <td>${parseTopStr(query.meat, query.veggie)}</td>
                         </tr>`);
-                            parseTop($("td").eq(5),query.meat, query.veggie);
                         }
-
                     }
-
-                }
-                else{
-                    if(data.info = 'Fail'){
+                    var curTime = new Date();
+                    var month = curTime.getMonth() + 1;
+                    var date = curTime.getDate();
+                    var min = curTime.getMinutes();
+                    $('.card-footer').text('更新時間: ' + curTime.getFullYear() + '/' + (month < 10 ? '0' + month : month) + '/' + (date < 10 ? '0' + date : date) + " " + curTime.getHours() + ':' + (min < 10 ? '0' + min : min));
+                } else {
+                    if (data.info = 'Fail') {
                         $msg.text('查詢的訂單不存在');
-                        $msg.css('color','red');
+                        $msg.css('color', 'red');
                     }
                 }
-            },'json');
+            }, 'json');
         }
         btn.show();
         return false;
     };
-    function parseTop($top, meat, veggie){
-        mObj = {'h':'火腿', 'p':'義式香腸'};
-        vObj = {'o':'洋蔥', 'g':'青椒', 'r':'甜椒','p':'鳳梨', 'm':'蘑菇'}
+
+    function parseTop($top, meat, veggie) {
+        mObj = {'h': '火腿', 'p': '義式香腸'};
+        vObj = {'o': '洋蔥', 'g': '青椒', 'r': '甜椒', 'p': '鳳梨', 'm': '蘑菇'}
         meatList = meat.split('');
         vegList = veggie.split('');
-        for(var m in meatList){
-            if(mObj[meatList[m]]!= null){
-                $top.append(mObj[meatList[m]]+'、');
+        for (var m in meatList) {
+            if (mObj[meatList[m]] != null) {
+                $top.append(mObj[meatList[m]] + '、');
             }
         }
-        for(var v in vegList){
-            if(vObj[vegList[v]]!= null){
-                $top.append(vObj[vegList[v]]+'、');
+        for (var v in vegList) {
+            if (vObj[vegList[v]] != null) {
+                $top.append(vObj[vegList[v]] + '、');
             }
         }
-        $top.text( $top.text().slice(0,-1));
+        $top.text($top.text().slice(0, -1));
+    }
+
+    function parseTopStr(meat, veggie) {
+        var result = '';
+        mObj = {'h': '火腿', 'p': '義式香腸'};
+        vObj = {'o': '洋蔥', 'g': '青椒', 'r': '甜椒', 'p': '鳳梨', 'm': '蘑菇'}
+        meatList = meat.split('');
+        vegList = veggie.split('');
+        for (var m in meatList) {
+            if (mObj[meatList[m]] != null) {
+                result += (mObj[meatList[m]] + '、');
+            }
+        }
+        for (var v in vegList) {
+            if (vObj[vegList[v]] != null) {
+                result += (vObj[vegList[v]] + '、');
+            }
+        }
+        return result.slice(0, -1);
     }
 
 </script>
