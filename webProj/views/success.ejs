@@ -6,21 +6,23 @@
         <div class="card-header">
             <h3>訂單成功</h3>
         </div>
-            <div class="card-body  text-white bg-secondary">
-                <h5 class="card-title ">訂單資料:</h5>
-                <p class="card-text-weight-bold text-monospace mx-3">
-                    Order#: <%= id %><br>
-                    Name: <%= name %><br>
-                    Cellphone: <%= cellphone %><br>
-                    Email: <%= email %><br>
-                    配料: <%= ham ? '火腿':''%> <%= pepp ? '義式香腸':''%> <%= onion ? '洋蔥':''%> <%= greenP ? '青椒':''%> <%= redP ? '甜椒':''%>
-                    <%= pin ? '鳳梨':''%> <%= mush ? '蘑菇':''%><br>
-                </p>
-
-
+        <div class="card-body  text-white bg-secondary">
+            <h5 class="card-title ">訂單資料:</h5>
+            <p class="card-text-weight-bold text-monospace mx-3">
+                Order#: <%= id %><br>
+                Name: <%= name %><br>
+                Cellphone: <%= cellphone %><br>
+                Email: <%= email %><br>
+                配料: <%= ham ? '火腿' : '' %> <%= pepp ? '義式香腸' : '' %> <%= onion ? '洋蔥' : '' %> <%= greenP ? '青椒' : '' %> <%= redP ? '甜椒' : '' %>
+                <%= pin ? '鳳梨' : '' %> <%= mush ? '蘑菇' : '' %><br>
+            </p>
+        </div>
+        <div class="card-footer text-right">
+            <a href="/menu">
+                <button type = 'button' class="btn btn-secondary btn-outline-light mr-2">下新訂單</button>
+            </a>
         </div>
     </div>
-
 
 
 </div>

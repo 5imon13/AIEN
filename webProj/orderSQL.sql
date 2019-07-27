@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS `order` (
 `oid` int(`order`6) NOT NULL,
 `name` varchar(255) NOT NULL,
 `email` varchar(255) NOT NULL,
-`cellnumber` varchar(50) NOT NULL,
+`cellphone` varchar(50) NOT NULL,
 `odate` DATETIME  NOT NULL,
 `meat` varchar(255),
 `veggie` varchar(255)
